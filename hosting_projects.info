@@ -1,0 +1,13 @@
+name = Hosting Projects
+description = Link related sites and platforms.
+core = 7.x
+package = Hosting Development Tools
+dependencies[] = features
+dependencies[] = hosting_platform
+dependencies[] = hosting_site
+dependencies[] = text
+features[features_api][] = api:2
+features[field_base][] = field_project
+features[field_instance][] = node-platform-field_project
+features[field_instance][] = node-site-field_project
+project path = sites/all/modules
