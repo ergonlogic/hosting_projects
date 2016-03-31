@@ -1,5 +1,29 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Aegir hook implementations.
  */
+
+/**
+ * Implements hook_hosting_site_options_alter().
+ *
+ * Filter available platforms to only those associated with the same project as
+ * a site.
+ */
+function hosting_projects_hosting_site_options_alter(&$return, $site) {
+  if (count($site->field_project)) {
+    $site_project = $site->field_project['und'][0]['value'];
+    $platforms = $return['platform'];
+    $project_platforms = array();
+    foreach ($platforms as $pid) {
+      $platform = node_load($pid);
+      if (count($platform->field_project)) {
+        $platform_project = $platform->field_project['und'][0]['value'];
+        if ($platform_project == $site_project) {
+          $project_platforms[] = $pid;
+        }
+      }
+    }
+    $return['platform'] = $project_platforms;
+  }
+}
