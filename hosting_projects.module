@@ -11,7 +11,7 @@
  * a site.
  */
 function hosting_projects_hosting_site_options_alter(&$return, $site) {
-  if (count($site->field_project)) {
+  if (isset($site->field_project['und'][0]['value']) && $site->field_project['und'][0]['value'] != '') {
     $site_project = $site->field_project['und'][0]['value'];
     $platforms = $return['platform'];
     $project_platforms = array();
